@@ -5,8 +5,7 @@ import os
 import time
 from pynput import mouse
 from pynput import keyboard
-from PyQt5 import uic
-from PyQt5.QtWidgets import QApplication
+from PyQt5.QtCore import *
 
 class OptimusTime:
     def __init__(self):
@@ -24,6 +23,14 @@ class OptimusTime:
     def GetActionCount(self):
         return self.keyCount + self.mouseClickCount + self.scrollCount
     
+    def Start(self):
+        # start button clicked
+        print('Started')
+    
+    def Stop(self):
+        # start button clicked
+        print('Stopped')
+
     def SetupKeyboardHook(self):
         listener = keyboard.Listener(
             on_release=self.on_release)
