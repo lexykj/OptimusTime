@@ -68,12 +68,10 @@ class OptimusTime:
         dialogWindow = DialogWindow()
         dialog = Dialog()
         dialog.setupUi(dialogWindow)
-        dialogWindow.show()
-        exit()
+        dialogWindow.exec()
 
     def timerInterval(self):
         if self.GetActionCount() < 30:
             self.LowProductivityPrompt()
         self.resetActionCounts()
-        self.timer.start()
         print("Timer reset")
