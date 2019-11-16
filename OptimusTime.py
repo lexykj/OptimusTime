@@ -1,10 +1,9 @@
 import datetime
 import logging
 import sys
-import keyboard
 import time
-import mouse
-import ctypes
+from pynput import mouse
+from pynput import keyboard
 
 class OptimusTime:
     def __init__(self):
@@ -18,24 +17,22 @@ class OptimusTime:
         self.SetupMouseHook()
     
     def SetupKeyboardHook(self):
-        keyboard.on_press(self.KeyStrokeIncrement, False)
+        listener = keyboard.Listener(
+            on_release=self.on_release)
+        listener.start()
     
-    def SetupMouseHook(self):
-        mouse.hook(self.MouseIncrement)
-
-    def MouseIncrement(self, event):
-        # print(type(event))
-        if isinstance(event, mouse.ButtonEvent):
+    def on_click(self, x, y, button, pressed):
+        if not pressed:
             self.mouseClickCount += 1
-        elif isinstance(event, mouse.WheelEvent):
+
+    def on_scroll(self, x, y, dx, dy):
             self.scrollCount += 1
 
-    def KeyStrokeIncrement(self, x):
+    def on_release(self, key):
         self.keyCount += 1
 
-    # def LowProductivityPrompt(self):
-    #     result = ctypes.windll.user32.MessageBoxW(0, "Your Productivity is too low. Take a break?", "Low Productivity", 1)
-    #     # 1 means OK, 2 means cancel
-    #     if result is 1:
-    #         sys.exit()
-
+    def SetupMouseHook(self):
+        listener = mouse.Listener(
+            on_click=self.on_click,
+            on_scroll=self.on_scroll)
+        listener.start()
