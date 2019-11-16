@@ -1,5 +1,7 @@
 from OptimusTime import OptimusTime
 
+# Description: These tests require the user to type, click, and scroll to get the tests to pass
+
 # This is the entry-point for the application.
 if __name__ == '__main__':
     # Instantiate the time optimizer
