@@ -1,4 +1,4 @@
-from lib.OptimusTime import OptimusTime
+from OptimusTime import OptimusTime
 
 # This is the entry-point for the application.
 if __name__ == '__main__':
