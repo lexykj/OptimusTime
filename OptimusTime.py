@@ -8,10 +8,14 @@ import time
 from pynput import mouse
 from pynput import keyboard
 from PyQt5 import uic
+from PyQt5.QtWidgets import QApplication
 from PyQt5.QtCore import *
+from PyQt5.QtWidgets import *
+from PyQt5.QtGui import *
 
-class OptimusTime:
+class OptimusTime(QWidget):
     def __init__(self):
+        super().__init__()
         # initialize logging
         if os.path.isdir(os.getcwd()+"/logs") == False:
             os.mkdir(os.getcwd()+"/logs")
@@ -21,10 +25,8 @@ class OptimusTime:
         self.scrollCount = 0
         self.startedAt = datetime.datetime.now()
         self.SetupKeyboardHook()
+        time.sleep(1)
         self.SetupMouseHook()
-<<<<<<< Updated upstream
-        self.timer = threading.Timer(5, self.timerInterval)
-=======
         self.timer = threading.Timer(2*1, self.timerInterval)
         self.title = 'Optimus Time'
         self.left = 10
@@ -35,12 +37,10 @@ class OptimusTime:
         self.minimumHeight = 75
         self.maximumWidth = 250
         self.minimumWidth = 250
+        self.timerEnabled = False
         self.initUI()
     
     def initUI(self):
-        self.setWindowTitle(self.title)
-        self.setGeometry(self.left, self.top, self.width, self.height)
-        
         startButton = QPushButton('Start', self)
         startButton.setToolTip('Start tracking your effectivness')
         startButton.move(10,40)
@@ -55,7 +55,7 @@ class OptimusTime:
         stopButton.height = 32
         stopButton.clicked.connect(self.Stop)
         
-        self.apmLabel = QLabel('00032', self)
+        self.apmLabel = QLabel('0', self)
         self.apmLabel.width = 91
         self.apmLabel.height = 31
         self.apmLabel.move(155,8)
@@ -69,7 +69,6 @@ class OptimusTime:
         infoLabel.move(15,15)
         
         self.show()
->>>>>>> Stashed changes
 
     def GetActionCount(self):
         return self.keyCount + self.mouseClickCount + self.scrollCount
@@ -81,11 +80,13 @@ class OptimusTime:
     
     def Start(self):
         # start button clicked
+        self.timerEnabled = True
         self.timer.start()
         print('Started')
     
     def Stop(self):
         # start button clicked
+        self.timerEnabled = False
         self.timer.cancel()
         print('Stopped')
 
@@ -119,10 +120,11 @@ class OptimusTime:
         dialogWindow.exec()
 
     def timerInterval(self):
-        #if self.GetActionCount() < 10:
-        #self.LowProductivityPrompt()  
-        self.apmLabel.setText(str(self.GetActionCount()))
-        self.resetActionCounts()
-        time.sleep(2)
-        self.timerInterval()
-        print("Timer reset")
+        if self.timerEnabled:
+            #if self.GetActionCount() < 10:
+            #self.LowProductivityPrompt()  
+            self.apmLabel.setText(str(self.GetActionCount()))
+            self.resetActionCounts()
+            time.sleep(2)
+            print("Timer reset")
+            self.timerInterval()
