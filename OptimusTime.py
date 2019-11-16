@@ -13,15 +13,17 @@ class OptimusTime:
         self.mouseClickCount = 0
         self.scrollCount = 0
         self.startedAt = datetime.datetime.now()
-        # self.SetupKeyboardHook()
+        self.SetupKeyboardHook()
         self.SetupMouseHook()
     
     def SetupKeyboardHook(self):
-        time.sleep(5)
-        keyboard.write('TESTTESTTEST.')
+        keyboard.on_press(self.KeyStrokeIncrement, False)
     
     def SetupMouseHook(self):
-        mouse.on_click(self.mouseTest)
+        mouse.on_click(self.ClickIncrement)
 
-    def mouseTest(self):
-        print("click")
+    def ClickIncrement(self):
+        self.mouseClickCount += 1
+
+    def KeyStrokeIncrement(self, x):
+        self.keyCount += 1
