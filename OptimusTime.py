@@ -39,7 +39,11 @@ class OptimusTime:
     def Stop(self):
         # start button clicked
         self.timer.cancel()
+        print(self.CalcAPM())
         print('Stopped')
+
+    def CalcAPM(self):
+        return (self.keyCount+self.mouseClickCount+self.scrollCount)/((datetime.datetime.now()-self.startedAt).total_seconds()/60)
 
     def SetupKeyboardHook(self):
         listener = keyboard.Listener(
