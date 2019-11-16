@@ -2,7 +2,7 @@ import datetime
 import logging
 import sys
 import os
-import time
+import threading
 from pynput import mouse
 from pynput import keyboard
 from PyQt5.QtCore import *
@@ -19,16 +19,24 @@ class OptimusTime:
         self.startedAt = datetime.datetime.now()
         self.SetupKeyboardHook()
         self.SetupMouseHook()
+        self.timer = threading.Timer(5*60, self.timerInterval)
 
     def GetActionCount(self):
         return self.keyCount + self.mouseClickCount + self.scrollCount
+
+    def resetActionCounts(self):
+        self.keyCount = 0
+        self.mouseClickCount = 0
+        self.scrollCount = 0
     
     def Start(self):
         # start button clicked
+        self.timer.start()
         print('Started')
     
     def Stop(self):
         # start button clicked
+        self.timer.cancel()
         print('Stopped')
 
     def SetupKeyboardHook(self):
@@ -61,3 +69,9 @@ class OptimusTime:
         dialogWindow.show()
         app.exec_()
         exit()
+
+    def timerInterval(self):
+        if self.GetActionCount() < 30:
+            self.LowProductivityPrompt()
+        self.resetActionCounts()
+        self.timer.start()
