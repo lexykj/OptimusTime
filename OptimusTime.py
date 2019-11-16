@@ -1,6 +1,7 @@
 import datetime
 import logging
 import sys
+import os
 import time
 from pynput import mouse
 from pynput import keyboard
@@ -8,6 +9,8 @@ from pynput import keyboard
 class OptimusTime:
     def __init__(self):
         # initialize logging
+        if os.path.isdir(os.getcwd()+"/logs") == False:
+            os.mkdir(os.getcwd()+"/logs")
         logging.basicConfig(filename=sys.path[0]+'/logs/'+str(datetime.date.today())+'.log', level=logging.INFO,format=str(datetime.datetime.now())+' %(levelname)s:  %(message)s')
         self.keyCount = 0
         self.mouseClickCount = 0
