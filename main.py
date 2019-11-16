@@ -2,7 +2,6 @@ import sys
 import logging
 import datetime
 from MainForm import MainForm
-from PyQt5 import uic
 from PyQt5.QtWidgets import QApplication
 
 # This is the entry-point for the application.

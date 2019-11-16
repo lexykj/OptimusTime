@@ -5,6 +5,8 @@ import os
 import threading
 from pynput import mouse
 from pynput import keyboard
+from PyQt5 import uic
+from PyQt5.QtWidgets import QApplication
 from PyQt5.QtCore import *
 
 class OptimusTime:
@@ -19,7 +21,7 @@ class OptimusTime:
         self.startedAt = datetime.datetime.now()
         self.SetupKeyboardHook()
         self.SetupMouseHook()
-        self.timer = threading.Timer(5*60, self.timerInterval)
+        self.timer = threading.Timer(5, self.timerInterval)
 
     def GetActionCount(self):
         return self.keyCount + self.mouseClickCount + self.scrollCount
@@ -61,13 +63,12 @@ class OptimusTime:
         listener.start()
 
     def LowProductivityPrompt(self):
+        print("low prodcutivity tirgger")
         Dialog, DialogWindow = uic.loadUiType("Low Productivy Prompt.ui")
-        app = QApplication([])
         dialogWindow = DialogWindow()
         dialog = Dialog()
         dialog.setupUi(dialogWindow)
         dialogWindow.show()
-        app.exec_()
         exit()
 
     def timerInterval(self):
@@ -75,3 +76,4 @@ class OptimusTime:
             self.LowProductivityPrompt()
         self.resetActionCounts()
         self.timer.start()
+        print("Timer reset")
