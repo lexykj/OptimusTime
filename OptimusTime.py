@@ -20,10 +20,14 @@ class OptimusTime:
         keyboard.on_press(self.KeyStrokeIncrement, False)
     
     def SetupMouseHook(self):
-        mouse.on_click(self.ClickIncrement)
+        mouse.hook(self.MouseIncrement)
 
-    def ClickIncrement(self):
-        self.mouseClickCount += 1
+    def MouseIncrement(self, event):
+        # print(type(event))
+        if isinstance(event, mouse.ButtonEvent):
+            self.mouseClickCount += 1
+        elif isinstance(event, mouse.WheelEvent):
+            self.scrollCount += 1
 
     def KeyStrokeIncrement(self, x):
         self.keyCount += 1
