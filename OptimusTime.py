@@ -1,6 +1,8 @@
 import datetime
 import logging
 import sys
+import keyboard
+import time
 
 class OptimusTime:
     def __init__(self):
@@ -14,7 +16,8 @@ class OptimusTime:
         self.SetupMouseHook()
     
     def SetupKeyboardHook(self):
-        NotImplementedError()
+        time.sleep(5)
+        keyboard.write('TESTTESTTEST.')
     
     def SetupMouseHook(self):
         NotImplementedError()
