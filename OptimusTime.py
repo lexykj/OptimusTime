@@ -4,6 +4,7 @@ import sys
 import keyboard
 import time
 import mouse
+import ctypes
 
 class OptimusTime:
     def __init__(self):
@@ -31,3 +32,10 @@ class OptimusTime:
 
     def KeyStrokeIncrement(self, x):
         self.keyCount += 1
+
+    # def LowProductivityPrompt(self):
+    #     result = ctypes.windll.user32.MessageBoxW(0, "Your Productivity is too low. Take a break?", "Low Productivity", 1)
+    #     # 1 means OK, 2 means cancel
+    #     if result is 1:
+    #         sys.exit()
+
