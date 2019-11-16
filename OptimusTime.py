@@ -20,6 +20,9 @@ class OptimusTime:
         self.startedAt = datetime.datetime.now()
         self.SetupKeyboardHook()
         self.SetupMouseHook()
+
+    def GetActionCount(self):
+        return self.keyCount + self.mouseClickCount + self.scrollCount
     
     def SetupKeyboardHook(self):
         listener = keyboard.Listener(
