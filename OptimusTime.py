@@ -5,6 +5,8 @@ import os
 import time
 from pynput import mouse
 from pynput import keyboard
+from PyQt5 import uic
+from PyQt5.QtWidgets import QApplication
 
 class OptimusTime:
     def __init__(self):
@@ -39,3 +41,13 @@ class OptimusTime:
             on_click=self.on_click,
             on_scroll=self.on_scroll)
         listener.start()
+
+    def LowProductivityPrompt(self):
+        Dialog, DialogWindow = uic.loadUiType("Low Productivy Prompt.ui")
+        app = QApplication([])
+        dialogWindow = DialogWindow()
+        dialog = Dialog()
+        dialog.setupUi(dialogWindow)
+        dialogWindow.show()
+        app.exec_()
+        exit()
