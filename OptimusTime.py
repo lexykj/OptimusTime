@@ -3,6 +3,7 @@ import logging
 import sys
 import keyboard
 import time
+import mouse
 
 class OptimusTime:
     def __init__(self):
@@ -12,7 +13,7 @@ class OptimusTime:
         self.mouseClickCount = 0
         self.scrollCount = 0
         self.startedAt = datetime.datetime.now()
-        self.SetupKeyboardHook()
+        # self.SetupKeyboardHook()
         self.SetupMouseHook()
     
     def SetupKeyboardHook(self):
@@ -20,4 +21,7 @@ class OptimusTime:
         keyboard.write('TESTTESTTEST.')
     
     def SetupMouseHook(self):
-        NotImplementedError()
+        mouse.on_click(self.mouseTest)
+
+    def mouseTest(self):
+        print("click")
