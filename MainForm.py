@@ -12,6 +12,10 @@ class MainForm(QWidget):
         self.top = 10
         self.width = 250
         self.height = 75
+        self.maximumHeight = 75
+        self.minimumHeight = 75
+        self.maximumWidth = 250
+        self.minimumWidth = 250
         self.optimusTime = OptimusTime()
         self.initUI()
     
@@ -37,13 +41,13 @@ class MainForm(QWidget):
         apmLabel.width = 91
         apmLabel.height = 31
         apmLabel.move(155,8)
-        apmLabel.setFont(QFont('Arial', 32))
+        apmLabel.setFont(QFont('Arial', 24))
         apmLabel.setAlignment(Qt.AlignRight)
 
         infoLabel = QLabel('Actions Per Minute', self)
         infoLabel.width = 151
         infoLabel.height = 51
-        infoLabel.setFont(QFont('Arial', 16))
+        infoLabel.setFont(QFont('Arial', 12))
         infoLabel.move(15,15)
         
         self.show()
